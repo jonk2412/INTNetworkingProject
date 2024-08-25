@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Server IP address (passed as argument)
+# Server IP add ress (passed as argument)
 SERVER_IP="${1}"
 
 # Check if serv er IP is provided
