@@ -3,7 +3,7 @@
 # Server IP address (passed as argument)
 SERVER_IP="${1}"
 
-# Check if server IP is provided
+# Check if serv er IP is provided
 if [ -z "$SERVER_IP" ]; then
   echo "Error: Please provide the server IP address as an argument."
   exit 1
