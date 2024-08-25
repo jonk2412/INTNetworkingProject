@@ -14,7 +14,7 @@ if [[ $# -lt 2 ]]; then
   exit 1
 fi
 
-# Extract arguments
+# Extrac t arguments
 bastion_ip="$1"
 target_host="$2"
 command_to_run="${3:-}"  # Optional command (default empty)

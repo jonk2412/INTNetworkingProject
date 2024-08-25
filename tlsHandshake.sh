@@ -81,10 +81,10 @@ if [ -z "$server_response" ]; then
   exit 3
 fi
 
-# Parse server response for encrypted sample message
+# Pars e server response for encrypted sample message
 encrypted_sample_message=$(echo "$server_response" | jq -r '.encryptedSampleMessage')
 
-# Step 6: Decrypt Sample Message and Verify
+# Step 6: Decrypt Sample Message and  Verify
 echo "Decrypting sample message..."
 decrypted_sample_message=$(echo "$encrypted_sample_message" | base64 -d | openssl enc -d -aes-256-cbc -pbkdf2 -k "${master_key}")
 
