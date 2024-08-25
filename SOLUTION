@@ -1,26 +1,32 @@
 Local DNS Server IP
 -------------------
-<ip-here>
+127.0.0.53
 
 
 
 Default gateway IP
 -------------------
-<ip-here>
+10.0.0.1
 
 
 
 DHCP IP allocation sys-logs
 -------------------
-<logs-here>
+2024-08-18T08:05:48.030492+00:00 ip-10-0-0-234 dhcpcd[454]: ens5: soliciting a DHCP lease
+2024-08-18T08:05:48.030608+00:00 ip-10-0-0-234 systemd-networkd[518]: ens5: DHCPv4 address 10.0.0.234/24, gateway 10.0.0.1 acquired from 10.0.0.1
+
 
 
 
 Public to private num of hops
 -------------------
-<answer-here>
+traceroute to 127.0.0.53 (127.0.0.53), 64 hops max
+  1   127.0.0.53  0.003ms  0.002ms  0.001ms
+
+only 1 hop cause its on the same vpc.
+
 
 
 DNS queries from the private instance
 -------------------
-<answer-here>
+no, only port 22 is open just for ssh.
