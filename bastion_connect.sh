@@ -6,7 +6,7 @@ if [[ -z "${KEY_PATH}" ]]; then
   exit 5
 fi
 
-# Check f o r required arguments (at least 2)
+# Check for required arguments (at least 2)
 if [[ $# -lt 2 ]]; then
   echo "Usage: $0 <bastion_ip> <target_host>"
   echo "OR"
