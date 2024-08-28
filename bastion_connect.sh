@@ -14,26 +14,17 @@ if [[ $# -lt 2 ]]; then
   exit 1
 fi
 
-# Extrac t argum ents
+# Extract arguments
 bastion_ip="$1"
 target_host="$2"
 command_to_run="${3:-}"  # Optional command (default empty)
+S_KEY="/home/ubuntu/.ssh/newjohn-VMPS.pem"
 
 # Connect to the bastion host using SSH
-ssh -i "$KEY_PATH" ubuntu@"bastion_ip"
 # Connect to the target host using SSH again
-ssh -i "$KEY_PATH_2" ubuntu@"target_host"
 
-#ssh -i "$KEY_PATH" ubuntu@"bastion_ip" 'ssh -i "$KEY_PATH_2" ubuntu@"target_host"'
-#ssh -i "$KEY_PATH" ubuntu@"$bastion_ip" << EOF
-#"ssh -i $KEY_PATH_2 ubuntu@"$target_host" '$command_to_run'"
-#ssh -t -i "$KEY_PATH" ubuntu@"bastion_ip"
+ssh -t -i "$KEY_PATH" ubuntu@$bastion_ip "ssh -i $S_KEY ubuntu@$target_host $command_to_run"
 
 
-
-#EOF
-#-o StrictHostKeyChecking=no
-#ssh -t -i "$KEY_PATH" ubuntu@"$BASTION_IP" "ssh -i $KEY_PATH_2 ubuntu@$PRIVATE_IP '$COMMAND'"
-
-# Exit script with the exit code returned by the inner SSH command
 exit $?
+# Print the captured output
