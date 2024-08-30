@@ -26,4 +26,4 @@ ssh -i ~/.ssh/key.pem ubuntu@"$private_ip" "sudo service ssh restart"
 # Clean up temporary directory
 rm -rf "$tmp_dir"
 
-echo "SSH key rotation completed on $private_ip. Use the newly generated key pair for future connections."
+echo "SSH key rotation completed on $private_ip. Use the newly generated key pair for future connections."ls
