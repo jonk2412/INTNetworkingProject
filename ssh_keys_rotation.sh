@@ -8,7 +8,7 @@ fi
 
 # Define variables
 PRIVATE_IP=$1
-PUBLIC_KEY_PATH=~/.ssh/id_rsa.pub
+PUBLIC_KEY_PATH="/home/ubuntu/.ssh/newjohn-VMPS.pem"
 NEW_KEY_PATH=~/.ssh/id_rsa_new
 
 # Generate a new key pair with a passphrase
@@ -18,8 +18,8 @@ ssh-keygen -t rsa -b 4096 -f $NEW_KEY_PATH -C "New SSH key for private instance"
 echo "StrictHostKeyChecking=no" > /tmp/ssh_config
 
 # Copy the new public key to the authorized_keys file on the private instance
-scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no /tmp/ssh_config ubuntu@$PRIVATE_IP:/tmp/ssh_config
-scp -i ~/.ssh/id_rsa $PUBLIC_KEY_PATH ubuntu@$PRIVATE_IP:~/.ssh/authorized_keys
+scp -i $PUBLIC_KEY_PATH -o StrictHostKeyChecking=no /tmp/ssh_config ubuntu@$PRIVATE_IP:/tmp/ssh_config
+scp -i $PUBLIC_KEY_PATH $PUBLIC_KEY_PATH ubuntu@$PRIVATE_IP:~/.ssh/authorized_keys
 
 # Test the new key (comment out if not desired)
 # ssh -i $NEW_KEY_PATH ubuntu@$PRIVATE_IP
@@ -27,8 +27,11 @@ scp -i ~/.ssh/id_rsa $PUBLIC_KEY_PATH ubuntu@$PRIVATE_IP:~/.ssh/authorized_keys
 # Remove temporary configuration
 rm /tmp/ssh_config
 
-# Update authorized_keys on the private instance (remove old key if possible)
-ssh -i $NEW_KEY_PATH ubuntu@$PRIVATE_IP "cat $NEW_KEY_PATH >> ~/.ssh/authorized_keys; chmod 600 ~/.ssh/authorized_keys"
+# Update authorized_keys on the private instance, replacing the old file
+ssh -i $NEW_KEY_PATH ubuntu@$PRIVATE_IP "mv ~/.ssh/authorized_keys ~/.ssh/authorized_keys.old; cat $NEW_KEY_PATH >> ~/.ssh/authorized_keys; chmod 600 ~/.ssh/authorized_keys"
+
+# (Optional) Remove the old authorized_keys file on the private instance
+ssh -i $NEW_KEY_PATH ubuntu@$PRIVATE_IP "rm -f ~/.ssh/authorized_keys.old"
 
 # Print instructions for connecting with the new key
 echo "Connection to the private instance is now possible with the new key:"
