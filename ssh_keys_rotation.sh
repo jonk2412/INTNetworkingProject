@@ -27,7 +27,7 @@ scp -i $PUBLIC_KEY_PATH $SSH_OPTS $PUBLIC_KEY_PATH ubuntu@$PRIVATE_IP:~/.ssh/aut
 # Test the new key (comment out if not desired)
 # ssh -i $NEW_KEY_PATH ubuntu@$PRIVATE_IP
 
-# Remove temporary configuration
+# Remove  temporary configuration
 rm /tmp/ssh_config
 
 # Update authorized_keys on the private instance, replacing the old file
